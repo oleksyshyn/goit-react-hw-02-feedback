@@ -5,16 +5,14 @@ import Statistics from './Statistics/Statistics';
 import Notification from './Notification/Notification';
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      good: 0,
-      neutral: 0,
-      bad: 0
-    }
+  state = {
+    good: 0,
+    neutral: 0,
+    bad: 0
   }
   
-  feedbackHandler = option => {
+  
+  handleFeedback = option => {
     this.setState((prevState) => {
       return {
         [option]: prevState[option] + 1
@@ -41,7 +39,7 @@ class App extends React.Component {
     return (
       <div>
         <Section title="Please leave feedback">
-          <FeedbackOptions options={Object.keys(this.state)} onLeaveFeedback={this.feedbackHandler}/>
+          <FeedbackOptions options={['good', 'neutral', 'bad']} onLeaveFeedback={this.handleFeedback}/>
         </Section>
         <Section title="Statistics">
           {total > 0 ? <Statistics good={good} neutral={neutral} bad={bad} total={total} positivePercentage={positivePercentage} /> : <Notification message="There is no feedback" />}
